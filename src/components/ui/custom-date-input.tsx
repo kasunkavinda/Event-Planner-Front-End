@@ -38,7 +38,6 @@ const CustomDateInput = React.forwardRef<
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    // Close dropdown when clicking outside
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
         if (
@@ -55,14 +54,12 @@ const CustomDateInput = React.forwardRef<
       };
     }, []);
 
-    // Update selected date when defaultValue changes
     useEffect(() => {
       if (defaultValue !== undefined) {
         setSelectedDate(defaultValue.toString());
       }
     }, [defaultValue]);
 
-    // Update selected date when value prop changes (for controlled components)
     useEffect(() => {
       if (props.value !== undefined) {
         setSelectedDate(props.value.toString());
@@ -110,7 +107,7 @@ const CustomDateInput = React.forwardRef<
         if (year < 1900 || year > 2100) return null;
 
         const date = new Date(year, month - 1, day);
-        // Validate that the date is actually valid (handles cases like Feb 30th)
+
         if (
           date.getFullYear() !== year ||
           date.getMonth() !== month - 1 ||
@@ -125,7 +122,6 @@ const CustomDateInput = React.forwardRef<
       }
     };
     const handleDateSelect = (date: Date) => {
-      // Check if the date is disabled before selecting
       if (isDateDisabled(date)) {
         return;
       }
@@ -134,12 +130,10 @@ const CustomDateInput = React.forwardRef<
       setSelectedDate(formattedDate);
       setIsOpen(false);
 
-      // Call the onValueChange callback
       if (onValueChange) {
         onValueChange(formattedDate);
       }
 
-      // Create a synthetic event to trigger onChange if provided
       if (onChange) {
         const syntheticEvent = {
           target: { value: formattedDate },
@@ -150,7 +144,6 @@ const CustomDateInput = React.forwardRef<
     };
 
     const isDateDisabled = (date: Date): boolean => {
-      // Reset time to compare only dates
       const dateOnly = new Date(
         date.getFullYear(),
         date.getMonth(),
@@ -192,18 +185,15 @@ const CustomDateInput = React.forwardRef<
 
       const days: Date[] = [];
 
-      // Add empty cells for days before the first day of the month
       for (let i = 0; i < startingDayOfWeek; i++) {
         days.push(new Date(year, month, -startingDayOfWeek + i + 1));
       }
 
-      // Add all days of the current month
       for (let day = 1; day <= daysInMonth; day++) {
         days.push(new Date(year, month, day));
       }
 
-      // Add days from next month to fill the calendar grid
-      const remainingCells = 42 - days.length; // 6 rows × 7 days = 42 cells
+      const remainingCells = 42 - days.length;
       for (let day = 1; day <= remainingCells; day++) {
         days.push(new Date(year, month + 1, day));
       }
@@ -263,12 +253,10 @@ const CustomDateInput = React.forwardRef<
       const value = e.target.value;
       setSelectedDate(value);
 
-      // Call the onValueChange callback
       if (onValueChange) {
         onValueChange(value);
       }
 
-      // Call the onChange callback if provided
       if (onChange) {
         onChange(e);
       }

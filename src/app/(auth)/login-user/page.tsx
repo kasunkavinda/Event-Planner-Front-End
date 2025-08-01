@@ -44,14 +44,7 @@ export default function LoginUserPage() {
                 />
 
                 <div className="text-center">
-                  <Button
-                    size="medium"
-                    // disabled={isPending}
-
-                    // isPending={isPending}
-                  >
-                    Sign In
-                  </Button>
+                  <Button size="medium">Sign In</Button>
                 </div>
               </form>
             </div>

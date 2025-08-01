@@ -132,7 +132,7 @@ const FormField = React.forwardRef<HTMLElement, FormFieldProps>(
               {...textareaProps}
               ref={ref as React.Ref<HTMLTextAreaElement>}
               aria-describedby={maxCharsId}
-              className={`block w-full rounded-md  bg-primary  px-4 py-2 text-white shadow-xs focus:border-secondary focus:ring-secondary focus-visible:outline-none ${className}`} // Add className
+              className={`block w-full rounded-md  bg-primary  px-4 py-2 text-white shadow-xs focus:border-secondary focus:ring-secondary focus-visible:outline-none ${className}`}
             />
           ) : type === "checkbox" ? (
             <div className="flex items-center space-x-2">
@@ -157,7 +157,7 @@ const FormField = React.forwardRef<HTMLElement, FormFieldProps>(
               ref={ref as React.Ref<HTMLInputElement>}
               type={type}
               aria-describedby={optionalId}
-              className={`block w-full rounded-md mt-2 bg-primary  px-4 py-2 text-white shadow-xs focus:border-secondary focus:ring-secondary focus-visible:outline-none ${className}`} // Add className
+              className={`block w-full rounded-md mt-2 bg-primary  px-4 py-2 text-white shadow-xs focus:border-secondary focus:ring-secondary focus-visible:outline-none ${className}`}
             />
           )}
         </div>

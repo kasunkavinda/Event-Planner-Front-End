@@ -46,14 +46,9 @@ const CreateEventForm = () => {
           <FormField
             name="date"
             type="date"
-            // placeholder="Date"
-            // value={selectedMinDate}
-            // onChange={(e) => setSelectedMinDate(e.target.value)}
-            // maxDate={selectedMaxDate || getTodayFormatted()}
             dateFormat="DD/MM/YYYY"
             className="w-full"
             label="Date"
-            // disabled={isPending}
           />
 
           <FormField
@@ -93,24 +88,10 @@ const CreateEventForm = () => {
           />
         </div>
         <div>
-          <Button
-            size="medium"
-            className="mx-2"
-            onClick={() => router.back()}
-            // disabled={isPending}
-
-            // isPending={isPending}
-          >
+          <Button size="medium" className="mx-2" onClick={() => router.back()}>
             Back
           </Button>
-          <Button
-            size="medium"
-            // disabled={isPending}
-
-            // isPending={isPending}
-          >
-            Save Event
-          </Button>
+          <Button size="medium">Save Event</Button>
         </div>
       </form>
     </div>
