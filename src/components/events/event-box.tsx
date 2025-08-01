@@ -32,6 +32,8 @@ const EventBox = ({
   rsvpCurrentCount,
 }: EventBoxProps) => {
   const [hasRsvped, setHasRsvped] = useState(false);
+  const [localRsvpCount, setLocalRsvpCount] = useState(rsvpCurrentCount);
+
   const [deleteEventState, deleteEventFormAction, deleteEventIsPending] =
     useActionState(deleteEvents, undefined);
 
@@ -54,6 +56,7 @@ const EventBox = ({
     if (typeof window !== "undefined") {
       localStorage.setItem(`rsvped-${user}-${id}`, "true");
       setHasRsvped(true);
+      setLocalRsvpCount((prev) => prev + 1);
     }
   }, [user, id]);
   useEffect(() => {
@@ -77,7 +80,7 @@ const EventBox = ({
       <p>Time: {time}</p>
       <p>Location: {location}</p>
       <p>
-        RSVPs: {rsvpCurrentCount}/{maxRsvpCount}
+        RSVPs: {localRsvpCount}/{maxRsvpCount}
       </p>
       {!publicEvent ? (
         <div className="mt-2 flex">
