@@ -4,7 +4,7 @@ import Button from "@/components/ui/button";
 import FormField from "@/components/ui/input";
 import { useStoredEventPlanner } from "@/hooks/useStoredEventPlanner";
 import { useRouter } from "next/navigation";
-import React, { useActionState, useEffect, useState } from "react";
+import React, { useActionState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 const CreateEventForm = () => {

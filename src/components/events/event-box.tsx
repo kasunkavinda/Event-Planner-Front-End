@@ -6,7 +6,6 @@ import Heading from "@/components/ui/heading";
 import { useStoredEventPlanner } from "@/hooks/useStoredEventPlanner";
 import { useStoredUser } from "@/hooks/useStoredUser";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, { useActionState, useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -64,9 +63,7 @@ const EventBox = ({
   }, [deleteEventState]);
 
   useEffect(() => {
-    console.log("===1", updateEventState);
     if (updateEventState?.isSuccess) {
-      console.log("===2");
       handleRsvpSuccess();
     } else if (!updateEventState?.isSuccess && updateEventState?.message) {
       toast.error(updateEventState.message);

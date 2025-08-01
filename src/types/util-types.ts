@@ -1,19 +1,5 @@
 import { z } from "zod";
 
-export type SearchParams = Promise<{
-  [key: string]: string | string[] | undefined;
-}>;
-
-export type PaginationProp = {
-  page: number;
-};
-
-// export type ActionReturnType<T> = {
-//   success: boolean;
-//   data: T | null;
-//   message: string;
-// };
-
 export type PaginatedResponse<T> = {
   isSuccess: boolean;
   data: T[] | null;

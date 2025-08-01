@@ -1,40 +1,38 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from "react";
 
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  color?: 'primary' | 'secondary' | 'accent' | 'cream';
-  hoverColor?: 'primary' | 'secondary' | 'accent' | 'cream' | 'complementary';
+  color?: "primary" | "secondary" | "accent" | "cream";
+  hoverColor?: "primary" | "secondary" | "accent" | "cream" | "complementary";
 }
 
 export const StyledLink = forwardRef<HTMLAnchorElement, LinkProps>(
   (
     {
-      color = 'cream',
-      hoverColor = 'complementary',
-      className = '',
+      color = "cream",
+      hoverColor = "complementary",
+      className = "",
       children,
       ...props
     },
-    ref,
+    ref
   ) => {
-    // Map the variant to text color classes (adjust these to your Tailwind configuration)
     const colorClasses: Record<string, string> = {
-      primary: 'text-primary',
-      secondary: 'text-secondary',
-      accent: 'text-accent',
-      cream: 'text-cream',
+      primary: "text-primary",
+      secondary: "text-secondary",
+      accent: "text-accent",
+      cream: "text-cream",
     };
 
-    // Map hoverColor to Tailwind hover classes
     const hoverClasses: Record<string, string> = {
-      primary: 'hover:text-primary',
-      secondary: 'hover:text-secondary',
-      accent: 'hover:text-accent',
-      cream: 'hover:text-cream',
-      complementary: 'hover:text-complementary',
+      primary: "hover:text-primary",
+      secondary: "hover:text-secondary",
+      accent: "hover:text-accent",
+      cream: "hover:text-cream",
+      complementary: "hover:text-complementary",
     };
 
-    const computedHoverClass = hoverColor ? hoverClasses[hoverColor] : '';
+    const computedHoverClass = hoverColor ? hoverClasses[hoverColor] : "";
 
     return (
       <a
@@ -48,9 +46,9 @@ export const StyledLink = forwardRef<HTMLAnchorElement, LinkProps>(
         </span>
       </a>
     );
-  },
+  }
 );
 
-StyledLink.displayName = 'StyledLink';
+StyledLink.displayName = "StyledLink";
 
 export default StyledLink;

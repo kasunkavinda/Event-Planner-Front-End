@@ -4,11 +4,8 @@ import EventBox from "@/components/events/event-box";
 import { Event } from "@/types/api-types/event";
 import Heading from "@/components/ui/heading";
 import Text from "@/components/ui/text";
-import Button from "@/components/ui/button";
-import StyledLink from "@/components/ui/link";
 import { useRouter } from "next/navigation";
-import { getEvents, getPubliclyAvailableEvents } from "@/actions/events";
-import Link from "next/link";
+import { getPubliclyAvailableEvents } from "@/actions/events";
 
 const PublicEventsView = () => {
   const router = useRouter();

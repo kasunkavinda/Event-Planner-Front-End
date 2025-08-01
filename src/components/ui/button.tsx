@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import Loader from "../common/loader";
 import { disabledStyle } from "../../consts/util-consts";
 
 export interface ButtonProps
@@ -12,8 +11,8 @@ export interface ButtonProps
     | "complementary"
     | "ghost";
   size?: "exSmall" | "small" | "medium" | "large" | "exlarge";
-  bgHover?: "primary" | "secondary" | "accent" | "cream"; // now only accepts these variants
-  icon?: React.ReactNode; // Optional icon to display on the left
+  bgHover?: "primary" | "secondary" | "accent" | "cream";
+  icon?: React.ReactNode;
   fullRounded?: boolean;
   disabled?: boolean;
   isPending?: boolean;
@@ -35,7 +34,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    // Define size mapping using Tailwind spacing and font sizes.
     const sizeClasses: Record<string, string> = {
       exSmall: "px-1 text-xs",
       small: "px-2 py-1 text-sm",
@@ -44,7 +42,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       exlarge: "px-8 py-4 text-xl",
     };
 
-    // Define color mapping. Adjust these classes to match your Tailwind configuration.
     const colorClasses: Record<string, string> = {
       primary: "bg-primary text-complementary",
       secondary: "bg-secondary text-complementary",
@@ -54,7 +51,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ghost: " bg-transparent text-complementary",
     };
 
-    // Define hover mapping for preset variants.
     const hoverClasses: Record<string, string> = {
       primary: "hover:bg-primary",
       secondary: "hover:bg-secondary hover:text-complementary",
@@ -63,10 +59,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       complementary: "hover:bg-complementary hover:text-primary",
     };
 
-    // Add disabled styling
     const disabledClasses = disabled ? disabledStyle : "";
 
-    // Determine the hover class if hoverBg is provided.
     const computedHoverClass =
       !disabled && bgHover ? hoverClasses[bgHover] : "";
 

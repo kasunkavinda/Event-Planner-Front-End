@@ -1,6 +1,6 @@
 export async function fetchWithAuth(
   input: RequestInfo,
-  userId: string | null = null, // Accept the token as a parameter
+  userId: string | null = null,
   init: RequestInit = {}
 ) {
   const headers = {

@@ -263,6 +263,7 @@ export async function updateEvents(
         isSuccess,
         message,
       };
+    } else {
     }
   } catch (err) {
     console.error(err);
@@ -272,9 +273,7 @@ export async function updateEvents(
       message: err instanceof Error ? err.message : UNEXPCTD_ERR,
     };
   }
-  if (values.upTheCount === "0") {
-    redirect("/events/my-events");
-  }
+  redirect("/events/my-events");
 }
 
 export async function deleteEvents(

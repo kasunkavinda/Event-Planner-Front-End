@@ -1,7 +1,6 @@
 import React, {
   InputHTMLAttributes,
   TextareaHTMLAttributes,
-  ChangeEvent,
   SelectHTMLAttributes,
 } from "react";
 import CustomSelect from "./custom-select";
@@ -12,7 +11,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   optional?: boolean;
   maxChars?: number;
   textarea?: false;
-  className?: string; // Add className to InputProps
+  className?: string;
   type:
     | "text"
     | "email"
@@ -49,7 +48,7 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   optional?: boolean;
   maxChars?: number;
   textarea: true;
-  className?: string; // Add className to TextareaProps
+  className?: string;
   type: "textarea";
   options?: never;
 }
@@ -58,9 +57,9 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   optional?: boolean;
   className?: string;
   type: "select";
-  maxChars?: never; // maxChars is not allowed for select
+  maxChars?: never;
   textarea?: never;
-  options: { code: string; value: string }[]; // Add options prop
+  options: { code: string; value: string }[];
 }
 
 type FormFieldProps = InputProps | DateProps | TextareaProps | SelectProps;
@@ -81,22 +80,6 @@ const FormField = React.forwardRef<HTMLElement, FormFieldProps>(
       maxDate?: string;
       dateFormat?: "DD/MM/YYYY" | "MM/DD/YYYY" | "YYYY-MM-DD";
     };
-
-    // -- commented out since we use server actions
-
-    // const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    //   if (inputProps.onChange) {
-    //     inputProps.onChange(event);
-    //   }
-    // };
-
-    // const handleTextareaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    //   if (textareaProps.onChange) {
-    //     textareaProps.onChange(event);
-    //   }
-    // };
-
-    // const date = new Date().toISOString().slice(0, 10);
 
     return (
       <div>
@@ -150,7 +133,6 @@ const FormField = React.forwardRef<HTMLElement, FormFieldProps>(
               ref={ref as React.Ref<HTMLTextAreaElement>}
               aria-describedby={maxCharsId}
               className={`block w-full rounded-md  bg-primary  px-4 py-2 text-white shadow-xs focus:border-secondary focus:ring-secondary focus-visible:outline-none ${className}`} // Add className
-              // onChange={handleTextareaChange} -- commented out since we use server actions
             />
           ) : type === "checkbox" ? (
             <div className="flex items-center space-x-2">
@@ -176,7 +158,6 @@ const FormField = React.forwardRef<HTMLElement, FormFieldProps>(
               type={type}
               aria-describedby={optionalId}
               className={`block w-full rounded-md mt-2 bg-primary  px-4 py-2 text-white shadow-xs focus:border-secondary focus:ring-secondary focus-visible:outline-none ${className}`} // Add className
-              // onChange={handleInputChange} -- commented out since we use server actions
             />
           )}
         </div>

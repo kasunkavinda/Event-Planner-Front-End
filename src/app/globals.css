@@ -55,11 +55,11 @@ input:-webkit-autofill {
 }
 
 input[type="checkbox"] {
-  width: 30px; /*Desired width*/
-  height: 30px; /*Desired height*/
+  width: 30px;
+  height: 30px;
   accent-color: #ffd200;
 }
 
 input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(1); /* turns black to white */
+  filter: invert(1);
 }
