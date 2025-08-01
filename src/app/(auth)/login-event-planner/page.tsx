@@ -1,6 +1,6 @@
 "use client";
-import { loginUser } from "@/actions/user";
-// import { loginUser } from "@/actions/user";
+import { loginEventPlanner } from "@/actions/user";
+// import { loginEventPlanner } from "@/actions/user";
 import Button from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import FormField from "@/components/ui/input";
@@ -10,9 +10,12 @@ import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import toast from "react-hot-toast";
 
-export default function LoginPage() {
+export default function LoginEventPlannerPage() {
   const router = useRouter();
-  const [state, formAction, isPending] = useActionState(loginUser, undefined);
+  const [state, formAction, isPending] = useActionState(
+    loginEventPlanner,
+    undefined
+  );
 
   useEffect(() => {
     if (!state?.isSuccess && state?.message) {

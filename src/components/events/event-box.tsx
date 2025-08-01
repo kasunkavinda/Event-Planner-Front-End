@@ -9,6 +9,7 @@ import React, { useActionState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 interface EventBoxProps {
+  publicEvent?: boolean;
   id: string;
   eventName: string;
   date: string;
@@ -18,6 +19,7 @@ interface EventBoxProps {
   maxRsvpCount: number;
 }
 const EventBox = ({
+  publicEvent = false,
   id,
   eventName,
   date,
@@ -46,16 +48,26 @@ const EventBox = ({
       <p>Time: {time}</p>
       <p>Location: {location}</p>
       <p>RSVPs: {maxRsvpCount}</p>
-      <div className="mt-2 flex">
-        <Link href={`/events/update-events/${id}`}>
-          <Button className="mr-2">Edit</Button>
-        </Link>
-        <form action={formAction}>
-          <input type="hidden" name="id" value={id} />
-          <input type="hidden" name="eventPlanner" value={eventPlanner} />
-          <Button>Delete</Button>
-        </form>
-      </div>
+      {!publicEvent ? (
+        <div className="mt-2 flex">
+          <Link href={`/events/update-events/${id}`}>
+            <Button className="mr-2">Edit</Button>
+          </Link>
+          <form action={formAction}>
+            <input type="hidden" name="id" value={id} />
+            <input type="hidden" name="eventPlanner" value={eventPlanner} />
+            <Button>Delete</Button>
+          </form>
+        </div>
+      ) : (
+        <div className="mt-2 flex">
+          <form action={formAction}>
+            <input type="hidden" name="id" value={id} />
+            <input type="hidden" name="eventPlanner" value={eventPlanner} />
+            <Button>RSVP</Button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

@@ -21,7 +21,7 @@ const EventsView = () => {
     const eventPlanner = localStorage.getItem("eventPlanner");
 
     if (!eventPlanner) {
-      router.push("/login");
+      router.push("/login-event-planner");
     }
   }, [router]);
 

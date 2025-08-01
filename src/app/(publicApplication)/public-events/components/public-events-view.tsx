@@ -18,10 +18,10 @@ const PublicEventsView = () => {
 
   // Protecting route. Ideally this should be done with middleware. but since we have to user local storage, we have to do something like this since, middleware is server and localstorage is client side
   useEffect(() => {
-    const eventPlanner = localStorage.getItem("eventPlanner");
+    const user = localStorage.getItem("user");
 
-    if (!eventPlanner) {
-      router.push("/login");
+    if (!user) {
+      router.push("/public-events");
     }
   }, [router]);
 
@@ -57,6 +57,7 @@ const PublicEventsView = () => {
           {events?.map((event) => (
             <div key={event.id}>
               <EventBox
+                publicEvent={true}
                 id={event.id}
                 eventName={event.eventName}
                 description={event.description}

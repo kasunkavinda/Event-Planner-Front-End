@@ -12,7 +12,7 @@ const HeaderPrivate = () => {
 
   const logoutHandler = () => {
     localStorage.removeItem("eventPlanner");
-    router.push("/login");
+    router.push("/login-event-planner");
   };
   return (
     <div>
