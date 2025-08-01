@@ -66,6 +66,7 @@ const EventsView = () => {
                 time={event.time}
                 location={event.location}
                 maxRsvpCount={event.maxRsvpCount}
+                rsvpCurrentCount={event.rsvpCurrentCount}
               />
             </div>
           ))}

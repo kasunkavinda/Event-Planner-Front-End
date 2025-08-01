@@ -208,6 +208,7 @@ export async function updateEvents(
     "location",
     "description",
     "maxRsvpCount",
+    "upTheCount",
   ]);
 
   if (!valid) {
@@ -218,13 +219,18 @@ export async function updateEvents(
     };
   }
 
+  const requestBody = {
+    ...values,
+    upTheCount: Number(values.upTheCount),
+  };
+
   try {
     const response = await fetchWithAuth(
       `${API_BASE_URL}/events/${values.id}`,
       values.eventPlanner,
       {
         method: "PUT",
-        body: JSON.stringify(values),
+        body: JSON.stringify(requestBody),
       }
     );
 
@@ -256,7 +262,11 @@ export async function updateEvents(
       message: err instanceof Error ? err.message : UNEXPCTD_ERR,
     };
   }
-  redirect("/events/my-events");
+  if (values.upTheCount === "0") {
+    redirect("/events/my-events");
+  } else {
+    redirect("/public-events");
+  }
 }
 
 export async function deleteEvents(

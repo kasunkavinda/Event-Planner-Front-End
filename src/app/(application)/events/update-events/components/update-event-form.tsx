@@ -73,6 +73,7 @@ const UpdateEventForm = ({ id }: UpdateEventFormProps) => {
               event?.id !== null && event?.id !== undefined ? event.id : ""
             }
           />
+          <input type="hidden" name="upTheCount" value={0} />
           <FormField
             label="Event Name"
             id="eventName"

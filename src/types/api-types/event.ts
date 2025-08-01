@@ -15,6 +15,7 @@ export const EventSchema = z.object({
   location: z.string(),
   description: z.string(),
   maxRsvpCount: z.number(),
+  rsvpCurrentCount: z.number(),
 });
 
 export type Event = z.infer<typeof EventSchema>;

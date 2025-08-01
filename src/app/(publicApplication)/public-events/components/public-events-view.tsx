@@ -65,6 +65,7 @@ const PublicEventsView = () => {
                 time={event.time}
                 location={event.location}
                 maxRsvpCount={event.maxRsvpCount}
+                rsvpCurrentCount={event.rsvpCurrentCount}
               />
             </div>
           ))}

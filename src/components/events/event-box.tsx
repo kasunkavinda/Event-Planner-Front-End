@@ -1,9 +1,10 @@
 "use client";
 
-import { deleteEvents } from "@/actions/events";
+import { deleteEvents, updateEvents } from "@/actions/events";
 import Button from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { useStoredEventPlanner } from "@/hooks/useStoredEventPlanner";
+import { useStoredUser } from "@/hooks/useStoredUser";
 import Link from "next/link";
 import React, { useActionState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -17,6 +18,7 @@ interface EventBoxProps {
   location: string;
   description: string;
   maxRsvpCount: number;
+  rsvpCurrentCount: number;
 }
 const EventBox = ({
   publicEvent = false,
@@ -27,19 +29,28 @@ const EventBox = ({
   location,
   maxRsvpCount,
   description,
+  rsvpCurrentCount,
 }: EventBoxProps) => {
-  const [state, formAction, isPending] = useActionState(
-    deleteEvents,
-    undefined
-  );
+  const [deleteEventState, deleteEventFormAction, deleteEventIsPending] =
+    useActionState(deleteEvents, undefined);
+
+  const [updateEventState, updateEventFormAction, updateEventIsPending] =
+    useActionState(updateEvents, undefined);
 
   const eventPlanner = useStoredEventPlanner();
+  const user = useStoredUser();
 
   useEffect(() => {
-    if (!state?.isSuccess && state?.message) {
-      toast.error(state.message);
+    if (!deleteEventState?.isSuccess && deleteEventState?.message) {
+      toast.error(deleteEventState.message);
     }
-  }, [state]);
+  }, [deleteEventState]);
+
+  useEffect(() => {
+    if (!updateEventState?.isSuccess && updateEventState?.message) {
+      toast.error(updateEventState.message);
+    }
+  }, [updateEventState]);
   return (
     <div className="bg-primary p-4 m-4">
       <Heading>Event Name: {eventName}</Heading>
@@ -47,13 +58,15 @@ const EventBox = ({
       <p>Date: {date}</p>
       <p>Time: {time}</p>
       <p>Location: {location}</p>
-      <p>RSVPs: {maxRsvpCount}</p>
+      <p>
+        RSVPs: {rsvpCurrentCount}/{maxRsvpCount}
+      </p>
       {!publicEvent ? (
         <div className="mt-2 flex">
           <Link href={`/events/update-events/${id}`}>
             <Button className="mr-2">Edit</Button>
           </Link>
-          <form action={formAction}>
+          <form action={deleteEventFormAction}>
             <input type="hidden" name="id" value={id} />
             <input type="hidden" name="eventPlanner" value={eventPlanner} />
             <Button>Delete</Button>
@@ -61,9 +74,16 @@ const EventBox = ({
         </div>
       ) : (
         <div className="mt-2 flex">
-          <form action={formAction}>
+          <form action={updateEventFormAction}>
             <input type="hidden" name="id" value={id} />
+            <input type="hidden" name="eventName" value={eventName} />
+            <input type="hidden" name="date" value={date} />
+            <input type="hidden" name="time" value={time} />
+            <input type="hidden" name="location" value={location} />
+            <input type="hidden" name="description" value={description} />
+            <input type="hidden" name="maxRsvpCount" value={maxRsvpCount} />
             <input type="hidden" name="eventPlanner" value={eventPlanner} />
+            <input type="hidden" name="upTheCount" value={1} />
             <Button>RSVP</Button>
           </form>
         </div>
