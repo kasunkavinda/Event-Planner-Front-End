@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+@theme {
+  --color-primary: #000000;
+  --color-secondary: #414142;
+  --color-accent: #6d6f71;
+  --color-cream: #cecece;
+  --color-complementary: #ffd200;
+  --color-white: #ffffff;
+  --color-blue-shade: #10069f;
+  --font-theme-black: "Avenir-Black", sans-serif;
+  --font-theme-light: "Avenir-Light", sans-serif;
+  --font-theme-medium: "Avenir-Medium", sans-serif;
 }
 
 @theme inline {
@@ -14,8 +27,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #ffffff;
   }
 }
 
@@ -23,4 +36,25 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px #6d6f71 inset !important;
+  -webkit-box-shadow: 0 0 0 1000px #6d6f71 inset !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+input[type="checkbox"] {
+  width: 30px; /*Desired width*/
+  height: 30px; /*Desired height*/
+  accent-color: #ffd200;
 }
