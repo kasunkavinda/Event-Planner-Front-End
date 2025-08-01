@@ -1,4 +1,4 @@
-## Local Event Planner & RSVP Tracker
+# Local Event Planner & RSVP Tracker
 
 Local event planner and RSVP tracker build with latest Next.js (with Nest.js backend) project using Server component first architecture(with some limitations due to local storage session handle), App Router and Server actions with latest react js hooks like useActionState.
 
