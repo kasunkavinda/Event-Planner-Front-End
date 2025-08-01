@@ -12,6 +12,7 @@ import {
 import { ApiResponse, PaginatedResponse } from "@/types/util-types";
 import { fetchWithAuth } from "@/util/auth-server";
 import { extractFormFields } from "@/util/form";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function getEvents(
@@ -254,6 +255,15 @@ export async function updateEvents(
     }
 
     const { data, isSuccess, message } = parsed.data;
+
+    if (values.upTheCount !== "0") {
+      revalidatePath("/public-events");
+      return {
+        data,
+        isSuccess,
+        message,
+      };
+    }
   } catch (err) {
     console.error(err);
     return {
@@ -264,8 +274,6 @@ export async function updateEvents(
   }
   if (values.upTheCount === "0") {
     redirect("/events/my-events");
-  } else {
-    redirect("/public-events");
   }
 }
 
