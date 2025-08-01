@@ -33,7 +33,6 @@ const EventsView = () => {
         const data = await getEvents(eventPlanner);
         if (data.isSuccess) {
           setEvents(data.data);
-          console.log("data", data);
         } else {
           setError(data.message);
         }

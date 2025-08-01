@@ -30,7 +30,6 @@ const PublicEventsView = () => {
         const data = await getPubliclyAvailableEvents();
         if (data.isSuccess) {
           setEvents(data.data);
-          console.log("data", data);
         } else {
           setError(data.message);
         }

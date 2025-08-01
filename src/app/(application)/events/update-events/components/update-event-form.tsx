@@ -39,7 +39,6 @@ const UpdateEventForm = ({ id }: UpdateEventFormProps) => {
         const data = await getEvent(eventPlanner, id);
         if (data.isSuccess) {
           setEvent(data.data);
-          console.log("data", data);
         } else {
           setError(data.message);
         }
