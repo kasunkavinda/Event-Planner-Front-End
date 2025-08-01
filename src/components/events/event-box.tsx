@@ -105,7 +105,12 @@ const EventBox = ({
             <input type="hidden" name="maxRsvpCount" value={maxRsvpCount} />
             <input type="hidden" name="eventPlanner" value={eventPlanner} />
             <input type="hidden" name="upTheCount" value={1} />
-            {user && !hasRsvped && !isEventFull ? <Button>RSVP</Button> : null}
+
+            <Button
+              disabled={user && !hasRsvped && !isEventFull ? false : true}
+            >
+              RSVP
+            </Button>
           </form>
         </div>
       )}
