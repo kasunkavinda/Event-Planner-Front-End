@@ -1,3 +1,5 @@
+// Util method to streame line native fetch
+
 export async function fetchWithAuth(
   input: RequestInfo,
   userId: string | null = null,

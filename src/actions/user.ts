@@ -1,3 +1,5 @@
+// Server actions are in here
+
 "use server";
 
 import { LoginEventPlanner, LoginUser } from "@/types/api-types/auth";

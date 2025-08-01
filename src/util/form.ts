@@ -1,3 +1,4 @@
+// To help streamline the user inputs - sanitize
 export function extractFormFields<T extends readonly string[]>(
   formData: FormData,
   keys: T
@@ -7,6 +8,7 @@ export function extractFormFields<T extends readonly string[]>(
 
   for (const key of keys) {
     const value = formData.get(key);
+    // Key point is in here - always check inputs are string(form submissions always will be strings)
     if (typeof value !== "string") {
       valid = false;
     } else {

@@ -1,37 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Local Event Planner & RSVP Tracker
+
+Local event planner and RSVP tracker build with latest Next.js (with Nest.js backend) project using Server component first architecture(with some limitations due to local storage session handle), App Router and Server actions with latest react js hooks like useActionState.
 
 ## Getting Started
 
-First, run the development server:
+First, install [Node.js](https://nodejs.org/en/download)
+
+Package manager used is [Pnpm](https://pnpm.io/)
+
+Clone the project
+
+Create a .env file in the project room and add below line
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+API_BASE_URL=http://localhost:4000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, run the development server: (Always check if the backend is running or not on the port 4000 )
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm i
+pnpm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Paths
 
-## Learn More
+### Event Planner
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+http://localhost:3000/events/my-events
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### User
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+http://localhost:3000/public-events
+```
 
-## Deploy on Vercel
+## Project Structure & Layouts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This repo includes three isolated layouts to separate user flows cleanly:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# Event-Planner-Front-End
+- app/(auth)/layout.tsx -> For authentication-related pages
+
+- app/(publicApplication)/layout.tsx -> For general public page
+
+- app/(application)/layout.tsx -> For event planner-specific experiences
+
+This ensures we can evolve each user group’s experience independently without bloating or coupling UI logic.
+
+## Reusable UI Components
+
+To streamline development (especially in teams) and also to minimize rework across developers, I have built modular, pre-designed UI components.
+
+```bash
+path: src/components/ui
+```
+
+## Architecture Principles
+
+- Server Components First: Prioritize server-rendered logic wherever possible(with some limitations due to local storage session handle)
+
+- Form Submission: Built using React’s latest useActionState and server actions.
+
+- Data Fetching: Uses native fetch() which now supports deduplication, caching, and Request memoization
+
+- Zod for Runtime Validation: TypeScript is compile-time only. Zod handles runtime validation to ensure type safety where it matters (API inputs, responses, form submissions, etc).
+
+- Minimal State Management: Two custom hooks abstract user context & session state. I avoided global state libraries like redux, zustand since set up is minimal
+
+```bash
+path: src/hooks
+```
+
+## Auth Strategy
+
+LocalStorage is used temporarily, but it's not secure for tokens. We need to move it to HttpOnly cookies for production, with some JWT token coming from backend
+
+We should use Middleware for route protection. But since we have local storage and since it's client, we can't use middleware since it's server. but ideally, we should use middlware. For the moment, I have done that on client using useEffect
+
+```bash
+useEffect(() => {
+    const eventPlanner = localStorage.getItem("eventPlanner");
+
+    if (!eventPlanner) {
+      router.push("/login-event-planner");
+    }
+}, [router]);
+```
+
+## Technologies Used
+
+- Next.js App Router
+- React 19+ (with useActionState)
+- Zod for runtime schema validation
+- Native fetch with full caching support
+- Modular layouts + reusable components
+- Custom hooks for session/user retrieval
+
+# Limitations or areas I would improve
+
+- Definitely we should replace local storage session with some sort of JWT token mechanism where, back end will generate a token upon login with a expiry time, and we should store that token in the http cookie to send out with subsequent API requests.
+
+- For complex projects, we should go for client state management tool like Zustand and for server state management, Tansack Query.
+
+- We should introduce a database for data persistency.
